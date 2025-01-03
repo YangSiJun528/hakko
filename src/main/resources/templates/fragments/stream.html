@@ -16,12 +16,13 @@
 
         <div th:if="${liveStream != null}">
             <div class="stream-info">
-                <h2 th:text="${liveStream.name}">스트리머 이름</h2>
+                <h2 th:text="${liveStream.channelName}">스트리머 이름</h2>
                 <p>
-                    채널: <a th:href="${liveStream.profileUrl}"
-                           th:text="${liveStream.profileUrl}"
+                    채널: <a th:href="${liveStream.channelUrl}"
+                           th:text="${liveStream.channelUrl}"
                            target="_blank">채널 URL</a>
                 </p>
+                <p th:text="${liveStream.streamingTitle}">방송 제목</p>
             </div>
 
             <iframe class="stream-frame"
