@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="streamContent">
+    <div class="stream-container">
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}">에러 메시지</p>
+            <button class="next-button"
+                    th:classappend="${platform.toLowerCase()}"
+                    th:hx-get="@{/fragment/{platform}/stream(platform=${platform.toLowerCase()})}"
+                    hx-target="closest .stream-container"
+                    hx-swap="outerHTML">
+                다시 시도
+            </button>
+        </div>
+
+        <div th:if="${liveStream != null}">
+            <div class="stream-info">
+                <h2 th:text="${liveStream.name}">스트리머 이름</h2>
+                <p>
+                    채널: <a th:href="${liveStream.profileUrl}"
+                           th:text="${liveStream.profileUrl}"
+                           target="_blank">채널 URL</a>
+                </p>
+            </div>
+
+            <iframe class="stream-frame"
+                    th:src="${liveStream.streamingUrl}"
+                    allowfullscreen>
+            </iframe>
+
+            <button class="next-button"
+                    th:classappend="${platform.toLowerCase()}"
+                    th:hx-get="@{/fragment/{platform}/stream(platform=${platform.toLowerCase()})}"
+                    hx-target="closest .stream-container"
+                    hx-swap="outerHTML">
+                다음 스트리머
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${platform + ' 스트리머 정보'}">스트리머 정보</title>
+    <link rel="stylesheet" th:href="@{/style/main.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10" defer></script>
+</head>
+<body>
+<header class="header">
+    <nav class="platform-nav">
+        <a th:href="@{/}" class="home-link">N인 이하</a>
+        <div class="platform-links">
+            <a th:href="@{/chzzk}"
+               th:class="${platform == 'CHZZK'} ? 'platform-link active-chzzk' : 'platform-link'">
+                CHZZK
+            </a>
+            <a th:href="@{/soop}"
+               th:class="${platform == 'SOOP'} ? 'platform-link active-soop' : 'platform-link'">
+                SOOP
+            </a>
+        </div>
+    </nav>
+</header>
+
+<main class="main-content">
+    <div class="stream-wrapper"
+         hx-trigger="load"
+         th:hx-get="@{/fragment/{platform}/stream(platform=${platform.toLowerCase()})}"
+         hx-swap="innerHTML">
+        <div th:replace="~{fragments/stream :: streamContent}"></div>
+    </div>
+</main>
+</body>
+</html>

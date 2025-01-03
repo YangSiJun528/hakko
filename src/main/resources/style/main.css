@@ -1,0 +1,267 @@
+/* static/css/style.css */
+:root {
+    --chzzk-primary: #1DDB16;
+    --chzzk-secondary: #0F9B0F;
+    --soop-primary: #4374D9;
+    --soop-secondary: #2E5CB8;
+}
+
+/* Common styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header styles */
+.header {
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.platform-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.platform-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.home-link {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.home-link:hover {
+    color: #666;
+}
+
+.platform-nav a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
+}
+
+.platform-nav a.active-chzzk {
+    background-color: var(--chzzk-primary);
+    color: white;
+}
+
+.platform-nav a.active-soop {
+    background-color: var(--soop-primary);
+    color: white;
+}
+
+/* Streamer content styles */
+.streamer-container {
+    width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.streamer-info {
+    margin-bottom: 1.5rem;
+}
+
+.streamer-info h2 {
+    color: #333;
+    margin: 0 0 1rem 0;
+}
+
+.streamer-info a {
+    color: #666;
+    text-decoration: none;
+}
+
+.streamer-info a:hover {
+    text-decoration: underline;
+}
+
+.stream-frame {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    background-color: #f8f8f8;
+}
+
+/* Button styles */
+.next-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+}
+
+.next-button.chzzk {
+    background-color: var(--chzzk-primary);
+}
+
+.next-button.chzzk:hover {
+    background-color: var(--chzzk-secondary);
+}
+
+.next-button.soop {
+    background-color: var(--soop-primary);
+}
+
+.next-button.soop:hover {
+    background-color: var(--soop-secondary);
+}
+
+/* Landing page styles */
+.hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.platform-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.platform-btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.platform-btn.chzzk {
+    background-color: var(--chzzk-primary);
+}
+
+.platform-btn.chzzk:hover {
+    background-color: var(--chzzk-secondary);
+}
+
+.platform-btn.soop {
+    background-color: var(--soop-primary);
+}
+
+.platform-btn.soop:hover {
+    background-color: var(--soop-secondary);
+}
+
+.info-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.info-section h2 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.info-section p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+/* Footer styles */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: white;
+    margin-top: 2rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: #666;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #333;
+}
+
+.sponsor-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #FF813F;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.sponsor-btn:hover {
+    background-color: #E66F2C;
+}
+
+.error-message {
+    text-align: center;
+    padding: 2rem;
+    background-color: #fff3f3;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.error-message p {
+    color: #e74c3c;
+    margin-bottom: 1rem;
+}
+
+.disclaimer {
+    font-size: 0.9rem;
+    color: #888;
+    text-align: center;
+    padding: 1rem;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+}
