@@ -35,7 +35,7 @@ jobs:
           
           # 현재 날짜로 로그 파일명 생성
           LOG_DATE=$(date +%Y%m%d)
-          LOG_DIR="../hakko-logs"
+          LOG_DIR="../logs"
           LOG_FILE="$LOG_DIR/hakko-$LOG_DATE.log"
           
           # logs 디렉토리가 없으면 생성
@@ -49,6 +49,20 @@ jobs:
             sleep 3  # 프로세스가 완전히 종료되길 기다림
           fi
           
-          # 새로 빌드된 jar 파일 실행
-          nohup java -jar ./build/libs/hakko.jar > $LOG_FILE 2>&1 &
-          echo "New application started with logs at: $LOG_FILE"
+          # build/libs 디렉토리에서 hakko로 시작하는 jar 파일 찾아서 실행
+          cd build/libs
+          JAR_FILE=$(ls hakko*.jar | grep -v plain.jar | head -n 1)
+          
+          # 백그라운드에서 실행하고 즉시 SSH 세션 종료
+          nohup java -jar $JAR_FILE > $LOG_FILE 2>&1 </dev/null &
+          disown
+          
+          # 프로세스가 시작되었는지 확인
+          sleep 2
+          if pgrep -f "$JAR_FILE" > /dev/null; then
+            echo "New application successfully started with jar: $JAR_FILE"
+            echo "Logs available at: $LOG_FILE"
+          else
+            echo "Failed to start application"
+            exit 1
+          fi
