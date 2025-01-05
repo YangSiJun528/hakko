@@ -14,15 +14,16 @@
             </button>
         </div>
 
-        <div th:if="${liveStream != null}">
+        <div th:if="${liveStream != null}" class="stream-content">
             <div class="stream-info">
                 <h2 th:text="${liveStream.channelName}">스트리머 이름</h2>
-                <p>
+                <p class="channel-url">
                     채널: <a th:href="${liveStream.channelUrl}"
                            th:text="${liveStream.channelUrl}"
-                           target="_blank">채널 URL</a>
+                           target="_blank"
+                           rel="noopener noreferrer">채널 URL</a>
                 </p>
-                <p th:text="${liveStream.streamingTitle}">방송 제목</p>
+                <p class="stream-title" th:text="${liveStream.streamingTitle}">방송 제목</p>
             </div>
 
             <iframe class="stream-frame"

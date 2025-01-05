@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">hakko</title>
+    <link rel="stylesheet" th:href="@{/style/normalize.css}">
+    <link rel="stylesheet" th:href="@{/style/main.css}">
+</head>
+<body>
+<header th:fragment="header(platform)">
+    <nav class="platform-nav">
+        <a th:href="@{/}" class="home-link">hakko</a>
+        <div class="platform-links">
+            <a th:href="@{/chzzk}"
+               th:class="'platform-link' + (${platform != null and platform == 'CHZZK'} ? ' active-chzzk' : '')">CHZZK</a>
+            <a th:href="@{/soop}"
+               th:class="'platform-link' + (${platform != null and platform == 'SOOP'} ? ' active-soop' : '')">SOOP</a>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

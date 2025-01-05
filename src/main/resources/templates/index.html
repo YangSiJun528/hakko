@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="kr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hakko</title>
-    <link rel="stylesheet" th:href="@{/style/normalize.css}">
-    <link rel="stylesheet" th:href="@{/style/main.css}">
+<head th:replace="~{fragments/header :: head('hakko')}">
 </head>
 <body>
+<header th:replace="~{fragments/header :: header('')}"></header>
+
 <div class="container">
     <section class="hero">
         <h1>hakko</h1>
@@ -16,54 +13,30 @@
             <a th:href="@{/chzzk}" class="platform-btn chzzk">CHZZK 스트리머</a>
             <a th:href="@{/soop}" class="platform-btn soop">SOOP 스트리머</a>
         </div>
-        <p class="disclaimer">
-            * 본 서비스는 각 플랫폼의 공식 서비스가 아닙니다.
-        </p>
+        <p class="disclaimer">* 본 서비스는 각 플랫폼의 공식 서비스가 아닙니다.</p>
     </section>
 
-    <section class="info-section">
+    <section class="content-section">
         <h2>프로젝트 소개</h2>
-        <div class="info-content">
-            <p><strong>hakko<strong>는 시청자 수가 적은 스트리머들을 쉽게 발견할 수 있도록 도와주는 서비스입니다.</p>
-
-            <div class="features">
-                <h3>주요 기능</h3>
-                <ul>
-                    <li>0명의 시청자를 보유한 스트리머 무작위 추천</li>
-                    <li>CHZZK, SOOP 플랫폼 지원</li>
-                    <li>실시간 방송 시청</li>
-                </ul>
-            </div>
+        <p><strong>hakko</strong>는 시청자 수가 적은 스트리머들을 쉽게 발견할 수 있도록 도와주는 서비스입니다.</p>
+        <div class="feature-list">
+            <h3>주요 기능</h3>
+            <ul>
+                <li>0명의 시청자를 보유한 스트리머 무작위 추천</li>
+                <li>CHZZK, SOOP 플랫폼 지원</li>
+                <li>실시간 방송 시청</li>
+            </ul>
         </div>
     </section>
 
-    <section class="developer-section">
+    <section class="content-section">
         <h2>개발자 소개</h2>
-        <div class="developer-content">
-            <p>안녕하세요! <strong>hakko</strong>을 개발한 입니다.</p>
-            <p>작은 스트리머들이 더 많은 시청자와 만날 수 있도록, 시청자들은 새로운 스트리머를 쉽게 발견할 수 있도록
-                이 프로젝트를 시작하게 되었습니다.</p>
-            <p><a href="https://nobody.live/">nobody.live</a>에 영감을 받아 만들어졌어요.</p>
-        </div>
+        <p>안녕하세요! <strong>hakko</strong>을 개발한 입니다.</p>
+        <p>작은 스트리머들이 더 많은 시청자와 만날 수 있도록, 시청자들은 새로운 스트리머를 쉽게 발견할 수 있도록 이 프로젝트를 시작하게 되었습니다.</p>
+        <p>이 프로젝트는 <a href="https://nobody.live/" class="link">nobody.live</a>에서 영감을 받았습니다.</p>
     </section>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="https://github.com/YangSiJun528/hakko" target="_blank" rel="noopener noreferrer">
-                    GitHub
-                </a>
-                <!-- TODO: 후훤 계정 만들기 -->
-                <a href="https://ko-fi.com/username" class="sponsor-btn" target="_blank" rel="noopener noreferrer">
-                    ☕ 커피 한 잔 사주기
-                </a>
-            </div>
-            <p class="disclaimer">
-                * 본 웹사이트는 CHZZK, SOOP의 공식 웹사이트가 아닙니다.<br>
-                각 플랫폼의 상표권은 해당 기업에 있습니다.
-            </p>
-        </div>
-    </footer>
 </div>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>
