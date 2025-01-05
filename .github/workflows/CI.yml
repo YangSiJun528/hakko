@@ -27,28 +27,26 @@ jobs:
         script: |
           cd ~/hakko
           
-          # git pull로 최신 코드 가져오기
+          # 최신 코드 가져오기
           git pull origin main
           
-          # gradle을 사용해 jar 파일 빌드
+          # Gradle 빌드
           ./gradlew clean build -x test
           
-          # 현재 날짜로 로그 파일명 생성
-          LOG_DATE=$(date +%Y%m%d)
+          # 로그 디렉토리와 파일명 설정
+          LOG_DATE=$(date +%Y%m%d-%H%M%S)
           LOG_DIR="../hakko-logs"
           LOG_FILE="$LOG_DIR/hakko-$LOG_DATE.log"
-          
-          # logs 디렉토리가 없으면 생성
           mkdir -p $LOG_DIR
           
-          # hakko가 포함된 jar 프로세스 찾아서 종료
+          # 기존 프로세스 종료
           pid=$(pgrep -f ".*hakko.*\.jar")
           if [ ! -z "$pid" ]; then
             echo "Killing process $pid"
             kill -9 $pid
-            sleep 3  # 프로세스가 완전히 종료되길 기다림
+            sleep 3
           fi
           
-          # 새로 빌드된 jar 파일 실행
-          nohup java -jar ./build/libs/hakko.jar > $LOG_FILE 2>&1 &
+          # 새 애플리케이션 실행 (메모리 제한 추가)
+          nohup java -Xms512m -Xmx1024m -jar ./build/libs/hakko.jar > $LOG_FILE 2>&1 &
           echo "New application started with logs at: $LOG_FILE"
