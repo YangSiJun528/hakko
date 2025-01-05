@@ -22,7 +22,6 @@ jobs:
           script: |
             set -e
             cd ~/hakko
-            sudo su
             
             # 최신 코드 가져오기
             git pull origin main
