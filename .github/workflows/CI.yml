@@ -1,0 +1,52 @@
+# 야매 CI 코드
+name: Project CI
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+    - name: execute remote ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.REMOTE_SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          cd ~/hakko
+          
+          # git pull로 최신 코드 가져오기
+          git pull origin main
+          
+          # gradle을 사용해 jar 파일 빌드
+          ./gradlew clean build -x test
+          
+          # 현재 날짜로 로그 파일명 생성
+          LOG_DATE=$(date +%Y%m%d)
+          LOG_DIR="../hakko-logs"
+          LOG_FILE="$LOG_DIR/hakko-$LOG_DATE.log"
+          
+          # logs 디렉토리가 없으면 생성
+          mkdir -p $LOG_DIR
+          
+          # hakko가 포함된 jar 프로세스 찾아서 종료
+          pid=$(pgrep -f ".*hakko.*\.jar")
+          if [ ! -z "$pid" ]; then
+            echo "Killing process $pid"
+            kill -9 $pid
+            sleep 3  # 프로세스가 완전히 종료되길 기다림
+          fi
+          
+          # 새로 빌드된 jar 파일 실행
+          nohup java -jar ./build/libs/hakko.jar > $LOG_FILE 2>&1 &
+          echo "New application started with logs at: $LOG_FILE"
