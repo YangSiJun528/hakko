@@ -11,11 +11,6 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
       - name: execute remote ssh
         uses: appleboy/ssh-action@master
         with:
@@ -32,41 +27,27 @@ jobs:
             
             # Gradle 빌드
             echo "Starting Gradle build..."
-            if ! ./gradlew clean build -x test; then
-              echo "Gradle build failed!" >&2
+            ./gradlew clean build -x test || { echo "Gradle build failed!" >&2; exit 1; }
+
+            # 도커 이미지 빌드
+            echo "Building Docker image..."
+            docker build -t hakko-app:latest .
+
+            # 기존 컨테이너 종료 및 제거
+            echo "Stopping and removing existing container..."
+            docker stop hakko-app || true
+            docker rm hakko-app || true
+
+            # 새 컨테이너 실행
+            echo "Starting new Docker container..."
+            docker run -d --name hakko-app -p 8080:8080 hakko-app:latest
+
+            # 컨테이너 상태 확인
+            echo "Waiting for the application to start..."
+            sleep 10
+            if ! docker logs hakko-app | grep -q "Started"; then
+              echo "Application did not start successfully." >&2
               exit 1
             fi
-            
-            # 로그 디렉토리와 파일명 설정
-            LOG_DATE=$(date +%Y%m%d-%H%M%S)
-            LOG_DIR="../hakko-logs"
-            LOG_FILE="$LOG_DIR/hakko-$LOG_DATE.log"
-            mkdir -p $LOG_DIR
-            
-            # 기존 애플리케이션 종료
-            echo "Stopping current application..."
-            pid=$(pgrep -f ".*hakko.*\.jar")
-            if [ -n "$pid" ]; then
-              kill -15 $pid
-              sleep 5
-              if ps -p $pid > /dev/null; then
-                echo "Process $pid did not terminate. Killing it..."
-                kill -9 $pid
-              fi
-            else
-              echo "No existing application process found."
-            fi
-            
-            # 종료 코드 무시 설정 추가
-            if [ $? -eq 143 ]; then
-              echo "SIGTERM received by the process (expected behavior), continuing..."
-            fi
-            
-            # 새 애플리케이션 실행
-            echo "Starting new application..."
-            nohup java -jar build/libs/hakko-*.jar > $LOG_FILE 2>&1 &
-            new_pid=$!
-            echo "New application started with PID $new_pid."
-            
-            # 오래된 로그 삭제 (14일 이상된 파일 제거)
-            find $LOG_DIR -type f -mtime +14 -exec rm {} \;
+
+            echo "Application is running and healthy!"
