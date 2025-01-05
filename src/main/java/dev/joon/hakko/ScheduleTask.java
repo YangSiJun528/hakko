@@ -27,7 +27,7 @@ public class ScheduleTask {
     }
 
     @Async
-    @Scheduled(cron = "0 0/5 * * * *")
+    @Scheduled(cron = "0 0/10 * * * *")
     public void scheduledTask() {
         log.info("Starting scheduled scan at: {}", LocalDateTime.now());
 
