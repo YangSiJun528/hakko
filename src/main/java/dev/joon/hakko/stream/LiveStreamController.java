@@ -37,15 +37,7 @@ public class LiveStreamController {
         return "stream";
     }
 
-    @GetMapping("/api/{platform}/random")
-    @ResponseBody
-    public ResponseEntity<LiveStream> getRandomLiveStreamByPlatform(@PathVariable String platform) {
-        return liveStreamRepository.getRandomLiveStream(platform)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/fragment/{platform}/liveStream")
+    @GetMapping("/fragment/{platform}/live-stream")
     public String getLiveStreamFragment(@PathVariable String platform, Model model) {
         model.addAttribute("platform", platform.toUpperCase());
 

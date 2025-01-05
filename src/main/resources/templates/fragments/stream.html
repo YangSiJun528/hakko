@@ -7,7 +7,7 @@
             <p th:text="${error}">에러 메시지</p>
             <button class="next-button"
                     th:classappend="${platform.toLowerCase()}"
-                    th:hx-get="@{/fragment/{platform}/stream(platform=${platform.toLowerCase()})}"
+                    th:hx-get="@{/fragment/{platform}/live-stream(platform=${platform.toLowerCase()})}"
                     hx-target="closest .stream-container"
                     hx-swap="outerHTML">
                 다시 시도
@@ -32,7 +32,7 @@
 
             <button class="next-button"
                     th:classappend="${platform.toLowerCase()}"
-                    th:hx-get="@{/fragment/{platform}/stream(platform=${platform.toLowerCase()})}"
+                    th:hx-get="@{/fragment/{platform}/live-stream(platform=${platform.toLowerCase()})}"
                     hx-target="closest .stream-container"
                     hx-swap="outerHTML">
                 다음 스트리머
