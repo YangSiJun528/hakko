@@ -1,4 +1,5 @@
-name: Project CI
+# 애메 CD, 나중에 고쳐야함. 보안 성능 등.
+name: Project CD
 on:
   push:
     branches:
@@ -21,6 +22,7 @@ jobs:
           script: |
             set -e
             cd ~/hakko
+            sudo su
             
             # 최신 코드 가져오기
             git pull origin main
