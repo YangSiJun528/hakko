@@ -1,6 +1,6 @@
-package online.online.hakko.config;
+package dev.joon.hakko.config;
 
-import online.online.hakko.stream.LiveStreamRepository;
+import dev.joon.hakko.stream.LiveStreamRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

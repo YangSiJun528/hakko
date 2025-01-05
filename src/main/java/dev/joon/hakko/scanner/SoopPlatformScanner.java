@@ -1,10 +1,10 @@
-package online.online.hakko.scanner;
+package dev.joon.hakko.scanner;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import online.online.hakko.stream.LiveStream;
+import dev.joon.hakko.stream.LiveStream;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;

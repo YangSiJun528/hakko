@@ -1,4 +1,4 @@
-package online.online.hakko.stream;
+package dev.joon.hakko.stream;
 
 public interface LiveStream {
 

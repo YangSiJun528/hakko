@@ -1,6 +1,6 @@
-package online.online.hakko.scanner;
+package dev.joon.hakko.scanner;
 
-import online.online.hakko.stream.LiveStream;
+import dev.joon.hakko.stream.LiveStream;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 

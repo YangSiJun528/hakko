@@ -1,4 +1,4 @@
-package online.online.hakko.config;
+package dev.joon.hakko.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package online.online.hakko;
+package dev.joon.hakko;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

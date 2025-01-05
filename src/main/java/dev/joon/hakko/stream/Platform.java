@@ -1,4 +1,4 @@
-package online.online.hakko.stream;
+package dev.joon.hakko.stream;
 
 // TODO: Enum으로 변경할지 고민해보기
 public class Platform {

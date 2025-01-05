@@ -1,7 +1,7 @@
-package online.online.hakko.scanner;
+package dev.joon.hakko.scanner;
 
-import online.online.hakko.stream.LiveStream;
-import online.online.hakko.stream.Platform;
+import dev.joon.hakko.stream.LiveStream;
+import dev.joon.hakko.stream.Platform;
 
 public record ChzzkLiveStream(
         ChzzkPlatformScanner.ChzzkLive live

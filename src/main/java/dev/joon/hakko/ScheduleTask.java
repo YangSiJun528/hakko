@@ -1,12 +1,10 @@
-package online.online.hakko;
+package dev.joon.hakko;
 
 import lombok.extern.slf4j.Slf4j;
-import online.online.hakko.scanner.DelegatePlatformScanner;
-import online.online.hakko.stream.LiveStream;
-import online.online.hakko.stream.LiveStreamRepository;
-import online.online.hakko.stream.Platform;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import dev.joon.hakko.scanner.DelegatePlatformScanner;
+import dev.joon.hakko.stream.LiveStream;
+import dev.joon.hakko.stream.LiveStreamRepository;
+import dev.joon.hakko.stream.Platform;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

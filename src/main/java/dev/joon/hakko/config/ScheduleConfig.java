@@ -1,4 +1,4 @@
-package online.online.hakko.config;
+package dev.joon.hakko.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
