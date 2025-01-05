@@ -1,4 +1,3 @@
-# 야매 CI 코드
 name: Project CI
 on:
   push:
@@ -11,42 +10,58 @@ jobs:
       contents: read
       packages: write
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    - name: execute remote ssh
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_REMOTE }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          cd ~/hakko
-          
-          # 최신 코드 가져오기
-          git pull origin main
-          
-          # Gradle 빌드
-          ./gradlew clean build -x test
-          
-          # 로그 디렉토리와 파일명 설정
-          LOG_DATE=$(date +%Y%m%d-%H%M%S)
-          LOG_DIR="../hakko-logs"
-          LOG_FILE="$LOG_DIR/hakko-$LOG_DATE.log"
-          mkdir -p $LOG_DIR
-          
-          # 기존 프로세스 종료
-          pid=$(pgrep -f ".*hakko.*\.jar")
-          if [ ! -z "$pid" ]; then
-            echo "Killing process $pid"
-            kill -9 $pid
-            sleep 3
-          fi
-          
-          # 새 애플리케이션 실행 (메모리 제한 추가)
-          nohup java -Xms512m -Xmx1024m -jar ./build/libs/hakko.jar > $LOG_FILE 2>&1 &
-          echo "New application started with logs at: $LOG_FILE"
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: execute remote ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_REMOTE }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            set -e
+            cd ~/hakko
+            
+            # 최신 코드 가져오기
+            git pull origin main
+            
+            # Gradle 빌드
+            echo "Starting Gradle build..."
+            if ! ./gradlew clean build -x test; then
+              echo "Gradle build failed!" >&2
+              exit 1
+            fi
+            
+            # 로그 디렉토리와 파일명 설정
+            LOG_DATE=$(date +%Y%m%d-%H%M%S)
+            LOG_DIR="../hakko-logs"
+            LOG_FILE="$LOG_DIR/hakko-$LOG_DATE.log"
+            mkdir -p $LOG_DIR
+            
+            # 기존 애플리케이션 종료
+            echo "Stopping current application..."
+            pid=$(pgrep -f ".*hakko.*\.jar")
+            if [ -n "$pid" ]; then
+              kill -15 $pid
+              sleep 5
+              if ps -p $pid > /dev/null; then
+                echo "Process $pid did not terminate. Killing it..."
+                kill -9 $pid
+              fi
+            else
+              echo "No existing application process found."
+            fi
+            
+            # 새 애플리케이션 실행
+            echo "Starting new application..."
+            nohup java -jar build/libs/hakko-*.jar > $LOG_FILE 2>&1 &
+            new_pid=$!
+            echo "New application started with PID $new_pid."
+            
+            # 오래된 로그 삭제 (14일 이상된 파일 제거)
+            find $LOG_DIR -type f -mtime +14 -exec rm {} \;
