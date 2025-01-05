@@ -57,6 +57,11 @@ jobs:
               echo "No existing application process found."
             fi
             
+            # 종료 코드 무시 설정 추가
+            if [ $? -eq 143 ]; then
+              echo "SIGTERM received by the process (expected behavior), continuing..."
+            fi
+            
             # 새 애플리케이션 실행
             echo "Starting new application..."
             nohup java -jar build/libs/hakko-*.jar > $LOG_FILE 2>&1 &
