@@ -28,7 +28,7 @@ jobs:
             
             # Gradle 빌드
             echo "Starting Gradle build..."
-            ./gradlew clean build -x test || { echo "Gradle build failed!" >&2; exit 1; }
+            ./gradlew build -x test || { echo "Gradle build failed!" >&2; exit 1; }
 
             # 도커 이미지 빌드
             echo "Building Docker image..."
