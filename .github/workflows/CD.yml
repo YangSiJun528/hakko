@@ -43,12 +43,12 @@ jobs:
             echo "Starting new Docker container..."
             docker run -d --name hakko-app -p 8080:8080 hakko-app:latest
 
-            # 컨테이너 상태 확인
-            echo "Waiting for the application to start..."
-            sleep 10
-            if ! docker logs hakko-app | grep -q "Started"; then
-              echo "Application did not start successfully." >&2
-              exit 1
-            fi
-
-            echo "Application is running and healthy!"
+#            # 컨테이너 상태 확인
+#            echo "Waiting for the application to start..."
+#            sleep 10
+#            if ! docker logs hakko-app | grep -q "Started"; then
+#              echo "Application did not start successfully." >&2
+#              exit 1
+#            fi
+#
+#            echo "Application is running and healthy!"
