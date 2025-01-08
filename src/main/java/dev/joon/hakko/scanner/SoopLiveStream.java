@@ -39,6 +39,6 @@ public record SoopLiveStream(
 
     @Override
     public int getViewerCount() {
-        return broadcast.currentViewCount();
+        return broadcast.currentViewCnt();
     }
 }

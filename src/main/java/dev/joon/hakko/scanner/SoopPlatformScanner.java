@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -53,9 +54,15 @@ public class SoopPlatformScanner implements PlatformScanner {
                 }
 
                 for (var broadcast : broadcasts) {
-                    if (broadcast.currentViewCount() > maxViewerCount) {
+                    if (broadcast == null) {
+                        continue;
+                    }
+                    if (broadcast.currentViewCnt() > maxViewerCount) {
                         shouldStop = true;
                         break;
+                    }
+                    if (Objects.equals(broadcast.isPassword, "Y")) {
+                        continue;
                     }
                     streams.add(new SoopLiveStream(broadcast));
                 }
@@ -73,19 +80,42 @@ public class SoopPlatformScanner implements PlatformScanner {
     record SoopResponse(
             @JsonProperty("total_cnt") String totalCnt,
             @JsonProperty("cnt") int cnt,
-            @JsonProperty("broad") List<SoopBroadcast> broad
+            @JsonProperty("broad") List<SoopBroadcast> broad,
+            @JsonProperty("time") long time,
+            @JsonProperty("is_wp") List<String> isWp
     ) {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     record SoopBroadcast(
             @JsonProperty("broad_no") String broadNo,
+            @JsonProperty("parent_broad_no") String parentBroadNo,
             @JsonProperty("user_id") String userId,
             @JsonProperty("user_nick") String userNick,
             @JsonProperty("broad_title") String broadTitle,
             @JsonProperty("broad_thumb") String broadThumb,
-            @JsonProperty("current_view_cnt") int currentViewCount,
-            @JsonProperty("category_name") String categoryName
+            @JsonProperty("broad_start") String broadStart,
+            @JsonProperty("broad_grade") String broadGrade,
+            @JsonProperty("broad_bps") String broadBps,
+            @JsonProperty("broad_resolution") String broadResolution,
+            @JsonProperty("visit_broad_type") String visitBroadType,
+            @JsonProperty("broad_type") String broadType,
+            @JsonProperty("station_name") String stationName,
+            @JsonProperty("broad_memo") String broadMemo,
+            @JsonProperty("current_view_cnt") int currentViewCnt,
+            @JsonProperty("m_current_view_cnt") String mobileCurrentViewCnt,
+            @JsonProperty("allowed_view_cnt") int allowedViewCnt,
+            @JsonProperty("is_password") String isPassword, // "Y", "N"
+            @JsonProperty("rank") String rank,
+            @JsonProperty("broad_cate_no") String broadCateNo,
+            @JsonProperty("total_view_cnt") int totalViewCnt,
+            @JsonProperty("pc_view_cnt") int pcViewCnt,
+            @JsonProperty("mobile_view_cnt") int mobileViewCnt,
+            @JsonProperty("is_drops") int isDrops,
+            @JsonProperty("auto_hashtags") List<String> autoHashtags,
+            @JsonProperty("category_tags") List<String> categoryTags,
+            @JsonProperty("category_name") String categoryName,
+            @JsonProperty("hash_tags") List<String> hashTags
     ) {
     }
 }
