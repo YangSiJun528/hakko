@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="kr">
 <head th:replace="~{fragments/header :: head('hakko')}">
+    <link rel="stylesheet" href="../static/style/main.css">
 </head>
 <body>
-<header th:replace="~{fragments/header :: header('')}"></header>
+<div class="root-wrapper">
+    <header th:replace="~{fragments/header :: header('')}"></header>
 
-<div class="container">
     <section class="hero">
         <h1>hakko</h1>
         <p>당신이 놓친 소중한 스트리머를 만나보세요</p>
@@ -36,8 +37,8 @@
         <p>작은 스트리머들이 더 많은 시청자와 만날 수 있도록, 시청자들은 새로운 스트리머를 쉽게 발견할 수 있도록 이 프로젝트를 시작하게 되었습니다.</p>
         <p>이 프로젝트는 <a href="https://nobody.live/" class="link">nobody.live</a>에서 영감을 받았습니다.</p>
     </section>
-</div>
 
-<footer th:replace="~{fragments/footer :: footer}"></footer>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</div>
 </body>
 </html>

@@ -3,18 +3,21 @@
 <head th:replace="~{fragments/header :: head(${platform + ' 스트리머 정보'})}">
 </head>
 <body>
-<header th:replace="~{fragments/header :: header(${platform})}"></header>
 
-<main class="container">
-    <div class="stream-wrapper"
-         hx-trigger="load"
-         th:hx-get="@{/fragment/{platform}/live-stream(platform=${platform.toLowerCase()})}"
-         hx-swap="innerHTML">
-        <div th:replace="~{fragments/stream :: streamContent}"></div>
-    </div>
-</main>
+<div class="root-wrapper">
+    <header th:replace="~{fragments/header :: header(${platform})}"></header>
 
-<footer th:replace="~{fragments/footer :: footer}"></footer>
+    <main class="main-container">
+        <div class="stream-wrapper"
+             hx-trigger="load"
+             th:hx-get="@{/fragment/{platform}/live-stream(platform=${platform.toLowerCase()})}"
+             hx-swap="innerHTML">
+            <div th:replace="~{fragments/stream :: streamContent}"></div>
+        </div>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</div>
 
 <script src="https://unpkg.com/htmx.org@1.9.12" defer></script>
 </body>

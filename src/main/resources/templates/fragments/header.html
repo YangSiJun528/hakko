@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<!-- head 정보가 여기 있는게 맞나 -->
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +14,9 @@
         <a th:href="@{/}" class="home-link">hakko</a>
         <div class="platform-links">
             <a th:href="@{/chzzk}"
-               th:class="'platform-link' + (${platform != null and platform == 'CHZZK'} ? ' active-chzzk' : '')">CHZZK</a>
+               th:class="'platform-link' + (${platform != null and platform == 'CHZZK'} ? ' enable-chzzk' : '' + ' chzzk-btn')">CHZZK</a>
             <a th:href="@{/soop}"
-               th:class="'platform-link' + (${platform != null and platform == 'SOOP'} ? ' active-soop' : '')">SOOP</a>
+               th:class="'platform-link' + (${platform != null and platform == 'SOOP'} ? ' active-soop' : '' + ' soop-btn')">SOOP</a>
         </div>
     </nav>
 </header>
