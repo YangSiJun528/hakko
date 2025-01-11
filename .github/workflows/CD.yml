@@ -4,19 +4,22 @@ name: CD Workflow
 on:
   workflow_run:
     workflows:
-      - CI Workflow # 트리거 조건: CI Workflow 성공
+      - CI Workflow
     types:
       - completed
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # 1. 원격 서버로 배포
+      # 1. Docker 이미지 이름 소문자로 변환
+      - name: Set environment variables
+        run: echo "IMAGE_NAME=${{ github.repository }}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_ENV
+
+      # 2. 원격 서버로 배포
       - name: Deploy to remote server
         uses: appleboy/ssh-action@master
         with:
@@ -34,6 +37,6 @@ jobs:
             docker rm hakko-app || true
 
             echo "새 Docker 컨테이너를 실행합니다..."
-            docker run -d --name hakko-app -p 8080:8080 hakko:latest
+            docker run -d --name hakko-app -p 8080:8080 ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
             echo "배포가 성공적으로 완료되었습니다!"
