@@ -27,7 +27,7 @@ jobs:
           script: |
             set -e
             echo "Docker 이미지를 Pull합니다..."
-            docker pull ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/hakko:latest
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
             echo "기존 컨테이너를 중지하고 제거합니다..."
             docker stop hakko-app || true
