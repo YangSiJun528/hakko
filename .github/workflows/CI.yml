@@ -28,6 +28,7 @@ jobs:
 
       # 3. 이미지의 metadata 추출
       - name: Extract metadata (tags, labels) for Docker
+        id: meta
         uses: docker/metadata-action@v4
         with:
           images: ${{ github.repository_owner }}/hakko
@@ -55,4 +56,5 @@ jobs:
           context: .
           file: ./Dockerfile # Dockerfile 경로
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/hakko:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
