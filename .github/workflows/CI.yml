@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  build-and-docker:
+  build-and-push-docker:
     runs-on: ubuntu-latest
     steps:
       # 1. 코드 체크아웃
