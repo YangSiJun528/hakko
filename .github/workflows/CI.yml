@@ -48,4 +48,4 @@ jobs:
           context: .
           file: ./Dockerfile # Dockerfile 경로
           push: true
-          tags: hakko:latest # Docker Hub에 푸시할 태그 이름
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/hakko:latest
