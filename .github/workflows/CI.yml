@@ -30,14 +30,15 @@ jobs:
       - name: Extract metadata (tags, labels) for Docker
         uses: docker/metadata-action@v4
         with:
-          images: ${{ vars.DOCKERHUB_USERNAME }}/hakko
+          images: ${{ github.repository_owner }}/hakko
 
       # 4. Docker Hub 로그인
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
 
       # 5. QEMU 설치 (다중 아키텍처 지원)
       - name: Set up QEMU
@@ -54,4 +55,4 @@ jobs:
           context: .
           file: ./Dockerfile # Dockerfile 경로
           push: true
-          tags: latest
+          tags: ghcr.io/${{ github.repository_owner }}/hakko:latest
