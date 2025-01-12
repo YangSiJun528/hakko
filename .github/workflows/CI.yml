@@ -59,17 +59,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-
-      # 6. Docker 이미지 빌드 및 푸시
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./Dockerfile # Dockerfile 경로
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}, latest
           labels: ${{ steps.meta.outputs.labels }}
 
       # 7. 아티팩트 증명을 사용하여 빌드의 출처 설정
