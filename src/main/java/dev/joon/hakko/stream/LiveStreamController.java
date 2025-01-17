@@ -45,6 +45,6 @@ public class LiveStreamController {
         }
         model.addAttribute("liveStream", liveStream);
 
-        return "fragments/stream :: streamContent";
+        return "fragments/stream-content :: streamContent";
     }
 }
