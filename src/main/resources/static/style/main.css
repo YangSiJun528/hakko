@@ -1,6 +1,6 @@
 /* Root Variables */
 :root {
-    --max-width: 860px;
+    --max-width: 1200px;
     --header-height: 64px;
     --page-padding: 16px;
     /* Colors */
@@ -12,7 +12,39 @@
     --color-border: #e5e7eb;
 }
 
+/* Responsive max-width adjustments */
+@media (max-width: 1199px) {
+    :root {
+        --max-width: 992px;
+    }
+}
+
+@media (max-width: 991px) {
+    :root {
+        --max-width: 768px;
+    }
+}
+
+@media (max-width: 767px) {
+    :root {
+        --max-width: 100%;
+    }
+
+    /* Mobile specific padding adjustments */
+    .index-section,
+    .stream-container,
+    header nav,
+    footer nav {
+        padding-left: var(--page-padding);
+        padding-right: var(--page-padding);
+    }
+}
+
 /* Base Styles */
+html {
+    overflow-y: scroll;
+}
+
 body {
     margin: 0;
     min-height: 100vh;
@@ -155,6 +187,24 @@ main {
     padding: 16px var(--page-padding);
 }
 
+@media (min-width: 768px) {
+    .stream-container {
+        margin: 0 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    .stream-container {
+        margin: 0 30px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .stream-container {
+        margin: 0 40px;
+    }
+}
+
 .stream-content {
     display: flex;
     flex-direction: column;
@@ -188,6 +238,7 @@ main {
 }
 
 .next-button {
+    width: 100%;
     padding: 12px 24px;
     font-size: 16px;
     font-weight: bold;
