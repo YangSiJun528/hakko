@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="hakko - 당신이 놓친 소중한 스트리머를 만나보세요">
+    <title th:text="${title}">hakko</title>
+    <link rel="stylesheet" th:href="@{/style/main.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script th:src="@{/js/theme.js}"></script>
+</head>
+</html>

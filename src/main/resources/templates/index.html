@@ -1,44 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="kr">
-<head th:replace="~{fragments/header :: head('hakko')}">
-    <link rel="stylesheet" href="../static/style/main.css">
-</head>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:replace="~{fragments/head :: head('hakko')}"></head>
 <body>
-<div class="root-wrapper">
-    <header th:replace="~{fragments/header :: header('')}"></header>
+<header th:replace="~{fragments/header :: header('')}"></header>
 
-    <section class="hero">
+<main>
+    <section class="index-section">
         <h1>hakko</h1>
         <p>당신이 놓친 소중한 스트리머를 만나보세요</p>
-        <p><strong>아직 테스트 단계입니다.</strong></p>
-        <div class="platform-links">
-            <a th:href="@{/chzzk}" class="platform-btn chzzk">CHZZK 스트리머</a>
-            <a th:href="@{/soop}" class="platform-btn soop">SOOP 스트리머</a>
-        </div>
-        <p class="disclaimer">* 본 서비스는 각 플랫폼의 공식 서비스가 아닙니다.</p>
-    </section>
-
-    <section class="content-section">
-        <h2>프로젝트 소개</h2>
-        <p><strong>hakko</strong>는 시청자 수가 적은 스트리머들을 쉽게 발견할 수 있도록 도와주는 서비스입니다.</p>
-        <div class="feature-list">
-            <h3>주요 기능</h3>
+        <nav class="platform-links">
             <ul>
-                <li>0명의 시청자를 보유한 스트리머 무작위 추천</li>
-                <li>CHZZK, SOOP 플랫폼 지원</li>
-                <li>실시간 방송 시청</li>
+                <li>
+                    <a th:href="@{/chzzk}">CHZZK 스트리머 보러가기</a>
+                </li>
+                <li>
+                    <a th:href="@{/soop}">CHZZK 스트리머 보러가기</a>
+                </li>
             </ul>
-        </div>
+        </nav>
     </section>
+</main>
 
-    <section class="content-section">
-        <h2>개발자 소개</h2>
-        <p>안녕하세요! <strong>hakko</strong>을 개발한 입니다.</p>
-        <p>작은 스트리머들이 더 많은 시청자와 만날 수 있도록, 시청자들은 새로운 스트리머를 쉽게 발견할 수 있도록 이 프로젝트를 시작하게 되었습니다.</p>
-        <p>이 프로젝트는 <a href="https://nobody.live/" class="link">nobody.live</a>에서 영감을 받았습니다.</p>
-    </section>
-
-    <footer th:replace="~{fragments/footer :: footer}"></footer>
-</div>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>
