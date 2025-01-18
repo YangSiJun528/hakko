@@ -280,6 +280,7 @@ footer nav {
 footer ul {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 32px;
     list-style: none;
     padding: 0;
