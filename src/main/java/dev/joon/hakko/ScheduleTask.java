@@ -26,7 +26,6 @@ public class ScheduleTask {
         this.liveStreamRepository = liveStreamRepository;
     }
 
-    @Async
     @Scheduled(cron = "0 0/10 * * * *")
     public void scheduledTask() {
         log.info("Starting scheduled scan at: {}", LocalDateTime.now());

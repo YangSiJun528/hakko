@@ -11,14 +11,11 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import java.util.concurrent.Executor;
 
 @Configuration
-@EnableAsync
 @EnableScheduling
 public class ScheduleConfig {
 
-    // TODO: 구성 설정 변경 필요
-    private static final int DEFAULT_MAX_POOL_SIZE = 3;
+    private static final int DEFAULT_MAX_POOL_SIZE = 1;
     private static final String SCHEDULER_THREAD_PREFIX = "ThreadPoolTaskScheduler";
-    private static final String EXECUTOR_THREAD_PREFIX = "ThreadPoolTaskExecutor";
 
     @Bean
     public TaskScheduler taskScheduler() {
@@ -26,13 +23,5 @@ public class ScheduleConfig {
         threadPoolTaskScheduler.setPoolSize(DEFAULT_MAX_POOL_SIZE);
         threadPoolTaskScheduler.setThreadNamePrefix(SCHEDULER_THREAD_PREFIX);
         return threadPoolTaskScheduler;
-    }
-
-    @Bean
-    public Executor asyncTaskExecutor() {
-        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-        threadPoolTaskExecutor.setMaxPoolSize(DEFAULT_MAX_POOL_SIZE);
-        threadPoolTaskExecutor.setThreadNamePrefix(EXECUTOR_THREAD_PREFIX);
-        return threadPoolTaskExecutor;
     }
 }
