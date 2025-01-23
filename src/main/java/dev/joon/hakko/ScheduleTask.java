@@ -27,7 +27,7 @@ public class ScheduleTask {
     }
 
     @Scheduled(cron = "0 0/10 * * * *")
-    public void scheduledTask() {
+    public void scanPlatforms() {
         log.info("Starting scheduled scan at: {}", LocalDateTime.now());
 
         try {

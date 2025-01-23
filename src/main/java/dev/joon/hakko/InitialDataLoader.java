@@ -18,6 +18,6 @@ public class InitialDataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) {
         log.info("Performing initial scan...");
-        scheduleTask.scheduledTask();
+        scheduleTask.scanPlatforms();
     }
 }
