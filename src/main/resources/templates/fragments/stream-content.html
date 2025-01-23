@@ -5,9 +5,8 @@
         <p th:text="${error}">에러 메시지</p>
         <button th:hx-get="@{/fragment/{platform}/live-stream(platform=${platform.toLowerCase()})}"
                 hx-target="closest div"
-                hx-swap="innerHTML">
-            다시 시도
-        </button>
+                hx-swap="innerHTML"
+                th:text="${error_btn}">에러버튼 문구</button>
     </article>
 
     <article th:if="${liveStream != null}" class="stream-content">
@@ -17,6 +16,12 @@
                th:text="${'채널 보러가기'}"
                target="_blank"
                rel="noopener noreferrer">채널 URL</a>
+            <br>
+            <br>
+            <a onclick="copyPageUrlToClipboard(this)"
+               th:data-platform="${liveStream.platform}"
+               th:data-channel-id="${liveStream.channelId}"
+               style="cursor: pointer;">URL 복사하기</a>
             <h2 th:text="${liveStream.streamingTitle}">방송 제목</h2>
         </div>
 
@@ -32,5 +37,28 @@
             다음 스트리머
         </button>
     </article>
+
+    <script th:inline="javascript">
+        function copyPageUrlToClipboard(element) {
+            const platform = element.getAttribute('data-platform').toLowerCase();
+            const channelId = element.getAttribute('data-channel-id');
+            const path = `/${platform}?channelId=${channelId}`;
+            const url = window.location.origin + path;
+
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    alert('URL이 클립보드에 복사되었습니다.');
+                })
+                .catch(err => {
+                    console.error('클립보드 복사 실패:', err);
+                    alert('URL 복사에 실패했습니다.');
+                });
+        }
+
+        document.body.addEventListener('htmx:afterSwap', function(evt) {
+            const url = new URL(window.location.href);
+            url.searchParams.delete('channelId');
+        });
+    </script>
 </div>
 </html>

@@ -39,6 +39,11 @@ public class LiveStreamRepository {
         return Optional.of(streamers.get(this.random.nextInt(streamers.size())));
     }
 
+    public Optional<LiveStream> getLiveStream(String platform, String channelId) {
+        ConcurrentHashMap<String, LiveStream> platformStreamers = this.repository.get(platform.toUpperCase());
+        return Optional.ofNullable(platformStreamers.get(channelId));
+    }
+
     public void clearPlatform(String platform) {
         this.repository.get(platform).clear();
     }
