@@ -1,8 +1,10 @@
 package dev.joon.hakko.stream;
 
-// TODO: Enum으로 변경할지 고민해보기
-public class Platform {
+public enum Platform {
+    CHZZK,
+    SOOP;
 
-    public static final String CHZZK = "CHZZK";
-    public static final String SOOP = "SOOP";
+    public static Platform from(String platform) throws IllegalArgumentException {
+        return Platform.valueOf(platform.toUpperCase());
+    }
 }

@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class LiveStreamRepository {
 
-    private final ConcurrentHashMap<String, ConcurrentHashMap<String, LiveStream>> repository = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Platform, ConcurrentHashMap<String, LiveStream>> repository = new ConcurrentHashMap<>();
     private final Random random = new Random();
 
     public LiveStreamRepository init() {
@@ -29,8 +29,8 @@ public class LiveStreamRepository {
         streamers.forEach(this::saveLiveStreams);
     }
 
-    public Optional<LiveStream> getRandomLiveStream(String platform) {
-        ConcurrentHashMap<String, LiveStream> platformStreamers = this.repository.get(platform.toUpperCase());
+    public Optional<LiveStream> getRandomLiveStream(Platform platform) {
+        ConcurrentHashMap<String, LiveStream> platformStreamers = this.repository.get(platform);
         if (platformStreamers == null || platformStreamers.isEmpty()) {
             return Optional.empty();
         }
@@ -39,11 +39,11 @@ public class LiveStreamRepository {
         return Optional.of(streamers.get(this.random.nextInt(streamers.size())));
     }
 
-    public void clearPlatform(String platform) {
+    public void clearPlatform(Platform platform) {
         this.repository.get(platform).clear();
     }
 
-    public int getCountLiveStream(String platform) {
+    public int getCountLiveStream(Platform platform) {
         return this.repository.get(platform).size();
     }
 }

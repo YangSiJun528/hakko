@@ -8,7 +8,7 @@ public record SoopLiveStream(
 ) implements LiveStream {
 
     @Override
-    public String getPlatform() {
+    public Platform getPlatform() {
         return Platform.SOOP;
     }
 

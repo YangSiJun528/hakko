@@ -23,9 +23,10 @@ public class LiveStreamController {
 
     @GetMapping("/{platform}")
     public String platformPage(@PathVariable String platform, Model model) {
-        model.addAttribute("platform", platform.toUpperCase());
+        Platform validPlatform = Platform.from(platform);
+        model.addAttribute("platform", validPlatform.name());
 
-        LiveStream liveStream = liveStreamRepository.getRandomLiveStream(platform).orElse(null);
+        LiveStream liveStream = liveStreamRepository.getRandomLiveStream(validPlatform).orElse(null);
         if (liveStream == null) {
             model.addAttribute("error", "현재 시청 가능한 스트리머가 없습니다.");
         }
@@ -37,9 +38,10 @@ public class LiveStreamController {
 
     @GetMapping("/fragment/{platform}/live-stream")
     public String getLiveStreamFragment(@PathVariable String platform, Model model) {
-        model.addAttribute("platform", platform.toUpperCase());
+        Platform validPlatform = Platform.from(platform);
+        model.addAttribute("platform", validPlatform.name());
 
-        LiveStream liveStream = liveStreamRepository.getRandomLiveStream(platform).orElse(null);
+        LiveStream liveStream = liveStreamRepository.getRandomLiveStream(validPlatform).orElse(null);
         if (liveStream == null) {
             model.addAttribute("error", "현재 시청 가능한 스트리머가 없습니다.");
         }

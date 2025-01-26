@@ -2,7 +2,7 @@ package dev.joon.hakko.stream;
 
 public interface LiveStream {
 
-    String getPlatform();
+    Platform getPlatform();
     String getChannelId();
     String getChannelName();
     String getChannelUrl();
