@@ -297,3 +297,29 @@ footer small {
     text-align: center;
     color: #666666;
 }
+
+
+/* Error Styles */
+
+.error-section {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 48px var(--page-padding);
+    text-align: center;
+}
+
+.error-section h1 {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.error-home-button {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 12px 24px;
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+}

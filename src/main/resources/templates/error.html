@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('에러가 발생했습니다')}"></head>
+<body>
+<header th:replace="~{fragments/header :: header('')}"></header>
+
+<main>
+    <section class="error-section">
+        <h1>문제가 발생했습니다</h1>
+        <p>불편을 드려 죄송합니다.</p>
+        <a href="/" class="error-home-button">메인 페이지로 돌아가기</a>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>
