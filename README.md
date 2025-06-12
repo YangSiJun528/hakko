@@ -2,7 +2,11 @@
 
 CHZZK와 SOOP에서 시청자가 적은 새로운 스트리머를 발견할 수 있도록 도와주는 웹 애플리케이션입니다.
 
-제작자가 호스팅하는 https://hakko.a-to.org/ 에서 볼 수 있고, 로컬/본인의 서버에서 실행할 수도 있습니다.
+~~제작자가 호스팅하는 https://hakko.a-to.org/ 에서 볼 수 있고~~, 로컬/본인의 서버에서 실행할 수도 있습니다.   
+(비용 상의 이유로 서비스를 중지하였습니다. 데모 영상을 참고해주세요.)
+
+![hakko-demo-1](https://github.com/user-attachments/assets/c116746f-c097-4a0b-a1c2-273fd474bfd4)
+
 
 자세한 내용은 아래 문서를 참고해 주세요:
 - [프로젝트 소개](docs/PROJECT.md)
