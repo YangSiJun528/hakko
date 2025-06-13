@@ -9,8 +9,8 @@ CHZZK와 SOOP에서 시청자가 적은 새로운 스트리머를 발견할 수 
 
 
 자세한 내용은 아래 문서를 참고해 주세요:
-- [프로젝트 소개](docs/PROJECT.md)
-- [설치/Self Host 가이드](docs/INSTALL.md)
+- [프로젝트 소개](./PROJECT.md)
+- [설치/Self Host 가이드](./INSTALL.md)
 
 ## 기여하기
 
